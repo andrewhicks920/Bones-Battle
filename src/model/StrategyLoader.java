@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 public class StrategyLoader extends ClassLoader {
-    public StrategyLoader() {
-    }
+    public StrategyLoader() {}
 
     private byte[] readClass(String className) {
         try {

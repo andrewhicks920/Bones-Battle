@@ -9,15 +9,13 @@ import java.util.Collections;
 import javax.swing.Timer;
 
 public class TurnManager implements ActionListener {
-
     private final GameState state;
     private final SwingGameView view;
     private final GameConfig config;
     private final GameController controller;
     private Timer timer;
 
-    public TurnManager(GameState state, SwingGameView view, GameConfig config,
-                       GameController controller) {
+    public TurnManager(GameState state, SwingGameView view, GameConfig config, GameController controller) {
         this.state = state;
         this.view = view;
         this.config = config;
@@ -29,6 +27,7 @@ public class TurnManager implements ActionListener {
             timer = new Timer(config.speedOfPlay, this);
             timer.setInitialDelay(config.flickerDelay);
         }
+
         timer.start();
     }
 
@@ -42,9 +41,8 @@ public class TurnManager implements ActionListener {
         if (current.getName().equals("Human")) {
             timer.stop();
             view.setNextButtonEnabled(true);
-        } else {
-            doComputerTick();
         }
+        else doComputerTick();
     }
 
     private void doComputerTick() {
@@ -55,23 +53,19 @@ public class TurnManager implements ActionListener {
             Territory attacker = current.getAttacker();
             Territory defender = current.getDefender();
 
-            view.highlightCell(attacker.getRow(), attacker.getCol(),
-                               attacker.getOwner().getClickColor());
+            view.highlightCell(attacker.getRow(), attacker.getCol(), attacker.getOwner().getClickColor());
             try { Thread.sleep(config.flickerDelay); } catch (Exception ignored) {}
 
-            view.highlightCell(defender.getRow(), defender.getCol(),
-                               defender.getOwner().getClickColor());
+            view.highlightCell(defender.getRow(), defender.getCol(), defender.getOwner().getClickColor());
             try { Thread.sleep(config.flickerDelay); } catch (Exception ignored) {}
 
             AttackResult result = state.processAttack(attacker, defender);
             view.showAttackResult(result);
             view.updateStatusLabels(state);
 
-        } else if (state.isGameOver()) {
-            handleGameOver();
-        } else {
-            endCurrentTurn();
         }
+        else if (state.isGameOver()) handleGameOver();
+        else endCurrentTurn();
     }
 
     private void handleGameOver() {
@@ -84,9 +78,10 @@ public class TurnManager implements ActionListener {
             ArrayList<Player> players = new ArrayList<>(state.getPlayers());
             Collections.sort(players);
 
-            if (state.isTournamentOver()) {
+            if (state.isTournamentOver())
                 view.printTournamentVictory(winner.getName(), state.getQtyGames(), players);
-            } else {
+
+            else {
                 view.printTournamentStandings(winner.getName(), players, state.getQtyGames());
                 Collections.shuffle(state.getPlayers());
                 controller.onStartClicked();

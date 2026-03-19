@@ -33,7 +33,8 @@ public class PlayerFactory {
                 Player human = new Player(name, Color.GREEN.darker().darker());
                 human.setStrategy(null);
                 players.add(human);
-            } else {
+            }
+            else {
                 Player computer = new Player(name, colorPool.get(colorIndex));
                 players.add(computer);
                 File classFile = new File("./" + name + ".class");
@@ -42,11 +43,13 @@ public class PlayerFactory {
                         StrategyLoader loader = new StrategyLoader();
                         Strategy stratInstance = (Strategy) loader.loadClass(name).newInstance();
                         computer.setStrategy(stratInstance);
-                    } else {
-                        computer.setStrategy(new ComputerStrategy());
                     }
+                    else
+                        computer.setStrategy(new ComputerStrategy());
+
                     computer.getStrategy().setPlayer(computer);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     System.out.println("ERROR:  Strategy for " + name + " not loaded due to " + e);
                     System.exit(1);
                 }

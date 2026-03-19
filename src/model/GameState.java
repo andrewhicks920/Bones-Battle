@@ -18,11 +18,10 @@ public class GameState {
     }
 
     public void newGame() {
-        this.board = new Map(players, GameConfig.MAP_ROWS, GameConfig.MAP_COLUMNS,
-                             config.mapGaps, GameConfig.MAX_DICE);
+        this.board = new Map(players, GameConfig.MAP_ROWS, GameConfig.MAP_COLUMNS, config.mapGaps, GameConfig.MAX_DICE);
         this.turnCounter = 0;
         this.currentPlayerIndex = 0;
-        this.currentPlayer = players.get(0);
+        this.currentPlayer = players.getFirst();
     }
 
     public Map getBoard() { return board; }
@@ -53,18 +52,18 @@ public class GameState {
             defender.setOwner(attacker.getOwner());
             defender.setDice(attacker.getDice() - 1);
             attacker.setDice(1);
-        } else {
-            attacker.setDice(1);
         }
+        else
+            attacker.setDice(1);
 
         return new AttackResult(attacker, defender, attackSum, defendSum, attackerWon);
     }
 
     private int rollDice(int numDice) {
         int sum = 0;
-        for (int i = 0; i < numDice; i++) {
+        for (int i = 0; i < numDice; i++)
             sum += (int) (Math.random() * 6.0 + 1.0);
-        }
+
         return sum;
     }
 
@@ -78,10 +77,10 @@ public class GameState {
         ArrayList<Territory> territories = board.getPropertyOf(player);
 
         if (connected >= diceToAward) {
-            for (Territory territory : territories) {
+            for (Territory territory : territories)
                 territory.setDice(board.MAXDICE);
-            }
-        } else {
+        }
+        else {
             for (int i = 0; i < connected; i++) {
                 Territory territory;
                 do {

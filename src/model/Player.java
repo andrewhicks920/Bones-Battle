@@ -3,11 +3,10 @@ package model;
 import java.awt.Color;
 
 public class Player implements Comparable<Player> {
-    private static boolean DEBUG = false;
     public static int playerQty = 0;
     private int id;
     private String name;
-    private Strategy strategy = null;
+    private Strategy strategy;
     private Color color;
     private Color clickColor;
     private int wins;
@@ -46,20 +45,8 @@ public class Player implements Comparable<Player> {
         return this.wins;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public void setClickColor(Color clickColor) {
-        this.clickColor = clickColor;
     }
 
     public void incrementWins() {

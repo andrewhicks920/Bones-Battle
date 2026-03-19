@@ -5,11 +5,9 @@ import java.util.ArrayList;
 public class ComputerStrategy implements Strategy {
     Player player;
     Territory attacker = null;
-    Territory defender = null;
     ArrayList<TPair> targetPairs = null;
 
-    public ComputerStrategy() {
-    }
+    public ComputerStrategy() {}
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -31,7 +29,7 @@ public class ComputerStrategy implements Strategy {
             }
         }
 
-        return this.targetPairs.size() > 0;
+        return !this.targetPairs.isEmpty();
     }
 
     public Territory getAttacker() {
@@ -45,9 +43,8 @@ public class ComputerStrategy implements Strategy {
     public Territory getDefender() {
         if (this.attacker != null) {
             for (TPair pair : this.targetPairs) {
-                if (pair.attacker == this.attacker) {
+                if (pair.attacker == this.attacker)
                     return pair.defender;
-                }
             }
         }
         return null;

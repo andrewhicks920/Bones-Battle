@@ -7,8 +7,7 @@ public class AttackResult {
     public final int defendSum;
     public final boolean attackerWon;
 
-    public AttackResult(Territory attacker, Territory defender,
-                        int attackSum, int defendSum, boolean attackerWon) {
+    public AttackResult(Territory attacker, Territory defender, int attackSum, int defendSum, boolean attackerWon) {
         this.attacker = attacker;
         this.defender = defender;
         this.attackSum = attackSum;

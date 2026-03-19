@@ -71,6 +71,7 @@ public class Graph {
         ArrayList<Integer> adjacentVertices = new ArrayList<>();
         if (inactiveVertices.contains(vertex))
             return adjacentVertices;
+
         for (int i = 0; i < adjacencyMatrix.length; i++) {
             if (adjacencyMatrix[vertex][i] == 1 && !inactiveVertices.contains(i))
                 adjacentVertices.add(i);

@@ -3,8 +3,7 @@ package model;
 public class MilquetoastStrategy implements Strategy {
     Player player;
 
-    public MilquetoastStrategy() {
-    }
+    public MilquetoastStrategy() {}
 
     public void setPlayer(Player player) {
         this.player = player;
